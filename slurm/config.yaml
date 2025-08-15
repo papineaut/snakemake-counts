@@ -1,0 +1,47 @@
+executor: cluster-generic
+cluster-generic-submit-cmd:
+  mkdir -p logs/slurm/{rule} &&
+  sbatch
+    --account=def-kchoquet
+    --mail-user=thomas.papineau-valex@usherbrooke.ca
+    --mail-type=FAIL,BEGIN
+    --job-name={rule}-{wildcards}
+    --mem={resources.mem_mb}
+    --time={resources.runtime}
+    --cpus-per-task={threads}
+    --output=logs/slurm/{rule}/%j-{wildcards}.log
+    --parsable
+
+
+jobs: 999 
+cluster-generic-cancel-cmd: scancel
+software-deployment-method: conda
+rerun-triggers: mtime
+keep-going: True
+printshellcmds: False
+show-failed-logs: True
+verbose: False
+
+
+default-resources:
+  mem_mb: 1000
+  runtime: 15
+
+set-resources:
+  Heather:
+    runtime: 60
+    mem_mb: 10000
+  Stats:
+    runtime: 7200
+    mem_mb: 10000
+  control:
+    runtime: 15
+    mem_mb: 5000
+  FDR:
+    runtime: 5
+    mem_mb: 1000
+set-threads:
+  Heather: 1
+  Stats: 1
+  control: 8
+  FDR: 1

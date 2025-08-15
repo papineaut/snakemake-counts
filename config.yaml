@@ -1,0 +1,19 @@
+threshold: 20
+
+read_length: 150
+strandness: "forward" # or reverse
+SAMPLES:
+  - D0_P69
+  - D0_P71
+  - D0_P74
+  - D2_P69
+  - D2_P71
+  - D2_P74
+  - D4_P69
+  - D4_P71
+  - D4_P74
+
+COMPARAISONS:
+  - D0_D2
+  - D0_D4
+  - D2_D4
